@@ -2,6 +2,14 @@
 include("../Database/Connection.php");
 include("../Database/Controller.php");
 $rows = getAll();
+
+// Notif
+session_start();
+if (isset($_SESSION['notification'])) {
+    echo "<span class='notification green animation-in' id='notification'>$_SESSION[notification]</span>";
+    unset($_SESSION['notification']);
+}
+
 // Tambah
 if (isset($_POST['submit'])) {
     $title = trim($_POST['title']);
@@ -74,12 +82,12 @@ if (isset($_POST['update'])) {
                     echo "<div class='card'>
                     <span class='nomor'>$index</span>
                     <form class='update-form' action='./index.php' method='post'>
-                    <input type='text' name='title' value=$row[title]>
-                    <input class='hidden' type='text' name='update-id' value=$row[id]>
+                    <input type='text' name='title' value='$row[title]'>
+                    <input class='hidden' type='text' name='update-id' value='$row[id]'>
                     <input class='submit primary' type='submit' name='update' value='UPDATE'>
                     </form>
                     <form action='./index.php' method='post'>
-                    <input class='hidden' type='text' name='hapus-id' value=$row[id]>
+                    <input class='hidden' type='text' name='hapus-id' value='$row[id]'>
                     <input class='submit danger' type='submit' name='hapus' value='HAPUS'>
                     </form>
                     </div>";
@@ -89,7 +97,13 @@ if (isset($_POST['update'])) {
     </div>
 </body>
 <script>
-
+    let notification = document.getElementById("notification");
+    if (notification) {
+        notification.addEventListener('animationend', () => {
+            notification.classList.remove('animation-in')
+            notification.classList.add('animation-out')
+    })
+    }
 </script>
 
 </html>

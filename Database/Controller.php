@@ -22,6 +22,7 @@ function insert($title) {
     $result = mysqli_query($conn, $query);
 
     if ($result) {
+        $_SESSION['notification'] = "Berhasil menambahkan data!";
         return true;
     }
     return false;
