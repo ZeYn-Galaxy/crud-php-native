@@ -6,7 +6,7 @@ $rows = getAll();
 // Notif
 session_start();
 if (isset($_SESSION['notification'])) {
-    echo "<span class='notification green animation-in' id='notification'>$_SESSION[notification]</span>";
+    echo $_SESSION['notification'];
     unset($_SESSION['notification']);
 }
 

@@ -22,7 +22,7 @@ function insert($title) {
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-        $_SESSION['notification'] = "Berhasil menambahkan data!";
+        $_SESSION['notification'] = "<span class='notification green animation-in' id='notification'>Berhasil Menambahkan Data!</span>";
         return true;
     }
     return false;
@@ -34,6 +34,7 @@ function deleteList($id) {
     $result = mysqli_query($conn, $query);
 
     if ($result) {
+        $_SESSION['notification'] = "<span class='notification danger animation-in' id='notification'>Berhasil Menghapus Data!</span>";
         return true;
     }
     return false;
@@ -44,6 +45,7 @@ function updateList($id, $title) {
     $query = "UPDATE books SET title='$title' WHERE id=$id";
     $result = mysqli_query($conn, $query);
     if ($result) {
+        $_SESSION['notification'] = "<span class='notification primary animation-in' id='notification'>Berhasil Update Data!</span>";
         return true;
     }
     return false;
